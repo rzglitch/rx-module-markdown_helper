@@ -32,14 +32,14 @@ class markdown_helper extends ModuleObject
 	 */
 	function checkUpdate()
 	{
-    $helper = '/markdown_helper/config.json';
-    $origin = \RX_BASEDIR . 'modules' . $helper;
-    $path = \RX_BASEDIR . 'files' . $helper;
+		$helper = '/markdown_helper/config.json';
+		$origin = \RX_BASEDIR . 'modules' . $helper;
+		$path = \RX_BASEDIR . 'files' . $helper;
 
 		if (!Rhymix\Framework\Storage::isFile($path))
-    {
-      Rhymix\Framework\Storage::copy($origin.'.example', $path);
-    }
+		{
+			Rhymix\Framework\Storage::copy($origin.'.example', $path);
+		}
 
 		$oModuleModel = getModel('module');
 
