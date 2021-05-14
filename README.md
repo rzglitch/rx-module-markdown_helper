@@ -10,6 +10,7 @@
 ## config.json 설정 방법
 
 > 모듈 버전 0.1.2부터 config.json을 설치 시 자동 생성되도록 변경하였으며 위치는 다음과 같습니다.
+> 
 > 파일 위치 : <라이믹스 경로>/files/markdown_helper/config.json
 
 문서/댓글 외의 다른 곳에 마크다운 에디터를 사용하려면 config.json 파일을 수정해야 합니다.
