@@ -10,7 +10,9 @@ class markdown_helperAdminController extends markdown_helper {
 	{
 		$css_file = Context::get('load_css');
 		$css_file = str_replace('.css', '', $css_file);
-		$css_file = preg_replace('[^a-zA-Z0-9_-$]', '', $css_file);
+		$css_file = str_replace('..', '', $css_file);
+		$css_file = str_replace('/', '', $css_file);
+		$css_file = preg_replace('[^a-zA-Z0-9_\-\.$]', '', $css_file);
 
 		$oMarkdown_helperController = getController('markdown_helper');
 		$ret = $oMarkdown_helperController->setConfig('css_file_name', $css_file);
