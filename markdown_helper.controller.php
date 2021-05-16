@@ -39,18 +39,21 @@ class markdown_helperController extends markdown_helper {
 		$oMarkdown_helperModel = getModel('markdown_helper');
 		$find_var = $oMarkdown_helperModel->getSrls();
 
-		$args->target_srl = $obj->$find_var;
+		if ($find_var)
+		{
+			$args->target_srl = $obj->$find_var;
 
-		$query = executeQuery('markdown_helper.getDocument', $args);
-		$data = $query->data;
+			$query = executeQuery('markdown_helper.getDocument', $args);
+			$data = $query->data;
 
-		if ($data->target_srl) {
-			$oDB = DB::getInstance();
-			$oDB->begin();
+			if ($data->target_srl) {
+				$oDB = DB::getInstance();
+				$oDB->begin();
 
-			$output = executeQuery('markdown_helper.deleteDocument', $args);
+				$output = executeQuery('markdown_helper.deleteDocument', $args);
 
-			$oDB->commit();
+				$oDB->commit();
+			}
 		}
 
 		return;
@@ -63,29 +66,32 @@ class markdown_helperController extends markdown_helper {
 		$oMarkdown_helperModel = getModel('markdown_helper');
 		$find_var = $oMarkdown_helperModel->getSrls();
 
-		$args->target_srl = $obj->$find_var;
+		if ($find_var)
+		{
+			$args->target_srl = $obj->$find_var;
 
-		$query = executeQuery('markdown_helper.getDocument', $args);
-		$data = $query->data;
+			$query = executeQuery('markdown_helper.getDocument', $args);
+			$data = $query->data;
 
-		$args->content = Context::get('markdown_content');
+			$args->content = Context::get('markdown_content');
 
-		if (!$data->target_srl) {
-			$args->m_helper_srl = getNextSequence();
+			if (!$data->target_srl) {
+				$args->m_helper_srl = getNextSequence();
 
-			$oDB = DB::getInstance();
-			$oDB->begin();
+				$oDB = DB::getInstance();
+				$oDB->begin();
 
-			$output = executeQuery('markdown_helper.insertDocument', $args);
+				$output = executeQuery('markdown_helper.insertDocument', $args);
 
-			$oDB->commit();
-		} else {
-			$oDB = DB::getInstance();
-			$oDB->begin();
+				$oDB->commit();
+			} else {
+				$oDB = DB::getInstance();
+				$oDB->begin();
 
-			$output = executeQuery('markdown_helper.updateDocument', $args);
+				$output = executeQuery('markdown_helper.updateDocument', $args);
 
-			$oDB->commit();
+				$oDB->commit();
+			}
 		}
 
 		return;

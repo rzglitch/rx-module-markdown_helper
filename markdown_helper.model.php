@@ -35,9 +35,12 @@ class markdown_helperModel extends markdown_helper {
 
 		$config = $this->getConfig('srls');
 
-		foreach ($config as $v) {
-			if ($v == $primary_key) {
-				return $v;
+		if ($primary_key)
+		{
+			foreach ($config as $v) {
+				if ($v == $primary_key) {
+					return $v;
+				}
 			}
 		}
 
