@@ -17,6 +17,15 @@ class markdown_helperAdminController extends markdown_helper {
 		$oMarkdown_helperController = getController('markdown_helper');
 		$oMarkdown_helperController->setConfig('css_file_name', $css_file);
 
-		return new BaseObject(-1, 'success_updated');
+		$this->setMessage('success_updated');
+
+		if (Context::get('success_return_url'))
+		{
+			$this->setRedirectUrl(Context::get('success_return_url'));
+		}
+		else
+		{
+			$this->setRedirectUrl(getNotEncodedUrl('', 'module', 'admin', 'act', 'dispMarkdown_helperAdminConfig'));
+		}
 	}
 }
