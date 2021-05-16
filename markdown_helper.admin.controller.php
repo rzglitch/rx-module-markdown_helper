@@ -15,7 +15,7 @@ class markdown_helperAdminController extends markdown_helper {
 		$css_file = preg_replace('[^a-zA-Z0-9_\-\.$]', '', $css_file);
 
 		$oMarkdown_helperController = getController('markdown_helper');
-		$ret = $oMarkdown_helperController->setConfig('css_file_name', $css_file);
+		$oMarkdown_helperController->setConfig('css_file_name', $css_file);
 
 		return new BaseObject(-1, 'success_updated');
 	}
