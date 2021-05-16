@@ -5,6 +5,14 @@
 	</permissions>
 	<actions>
 		<action name="getMarkdownData" type="model"/>
+		<action name="dispMarkdown_helperAdminConfig" type="view" admin_index="true" menu_name="markdown_helper" menu_index="true" />
+		<action name="procMarkdown_helperAdminInsertConfig" type="controller" ruleset="insertConfig" />
 	</actions>
-	<menus />
+	<menus>
+		<menu name="markdown_helper" type="all">
+			<title xml:lang="ko">마크다운 헬퍼</title>
+			<title xml:lang="en">Markdown Helper</title>
+			<title xml:lang="jp">マークダウンヘルパー</title>
+		</menu>
+	</menus>
 </module>

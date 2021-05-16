@@ -9,6 +9,10 @@ class markdown_helper extends ModuleObject
 {
 	private $triggers = null;
 
+	private $fixed_triggers = array(
+		array('display', 'markdown_helper', 'controller', 'triggerBeforeDisplay', 'before')
+	);
+
 	/**
 	 * @brief Install module
 	 */
@@ -17,13 +21,19 @@ class markdown_helper extends ModuleObject
 		$oModuleModel = getModel('module');
 		$oModuleController = getController('module');
 
-		$oMarkdown_HelperModel = getModel('markdown_helper');
-		$this->triggers = $oMarkdown_HelperModel->getConfig('triggers');
+		$oMarkdown_helperModel = getModel('markdown_helper');
+		$this->triggers = $oMarkdown_helperModel->getConfig('triggers');
 
 		foreach ($this->triggers as $trigger)
 		{
 			$oModuleController->insertTrigger($trigger[0], $trigger[1], $trigger[2], $trigger[3], $trigger[4]);
 		}
+
+		foreach ($this->fixed_triggers as $trigger)
+		{
+			$oModuleController->insertTrigger($trigger[0], $trigger[1], $trigger[2], $trigger[3], $trigger[4]);
+		}
+
 		return new BaseObject();
 	}
 
@@ -43,10 +53,18 @@ class markdown_helper extends ModuleObject
 
 		$oModuleModel = getModel('module');
 
-		$oMarkdown_HelperModel = getModel('markdown_helper');
-		$this->triggers = $oMarkdown_HelperModel->getConfig('triggers');
+		$oMarkdown_helperModel = getModel('markdown_helper');
+		$this->triggers = $oMarkdown_helperModel->getConfig('triggers');
 
 		foreach ($this->triggers as $trigger)
+		{
+			if (!$oModuleModel->getTrigger($trigger[0], $trigger[1], $trigger[2], $trigger[3], $trigger[4]))
+			{
+				return true;
+			}
+		}
+
+		foreach ($this->fixed_triggers as $trigger)
 		{
 			if (!$oModuleModel->getTrigger($trigger[0], $trigger[1], $trigger[2], $trigger[3], $trigger[4]))
 			{
@@ -65,8 +83,8 @@ class markdown_helper extends ModuleObject
 		$oModuleModel = getModel('module');
 		$oModuleController = getController('module');
 
-		$oMarkdown_HelperModel = getModel('markdown_helper');
-		$this->triggers = $oMarkdown_HelperModel->getConfig('triggers');
+		$oMarkdown_helperModel = getModel('markdown_helper');
+		$this->triggers = $oMarkdown_helperModel->getConfig('triggers');
 
 		foreach ($this->triggers as $trigger)
 		{
@@ -75,6 +93,15 @@ class markdown_helper extends ModuleObject
 				$oModuleController->insertTrigger($trigger[0], $trigger[1], $trigger[2], $trigger[3], $trigger[4]);
 			}
 		}
+
+		foreach ($this->fixed_triggers as $trigger)
+		{
+			if (!$oModuleModel->getTrigger($trigger[0], $trigger[1], $trigger[2], $trigger[3], $trigger[4]))
+			{
+				$oModuleController->insertTrigger($trigger[0], $trigger[1], $trigger[2], $trigger[3], $trigger[4]);
+			}
+		}
+
 		return new BaseObject(0, 'success_updated');
 	}
 

@@ -19,7 +19,14 @@ class markdown_helperModel extends markdown_helper {
 		$file = Rhymix\Framework\Storage::read($path);
 		$data = json_decode($file, true);
 
-		return $data[$k];
+		if (array_key_exists($k, $data)) 
+		{
+			return $data[$k];
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	function getSrls()

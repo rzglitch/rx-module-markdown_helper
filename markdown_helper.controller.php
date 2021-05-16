@@ -6,12 +6,38 @@
  */
 
 class markdown_helperController extends markdown_helper {
+	function setConfig($key, $value)
+	{
+		$oMarkdown_helperModel = getModel('markdown_helper');
+		$original_config = $oMarkdown_helperModel->getConfig($key);
+
+		$path = \RX_BASEDIR . 'files/markdown_helper/config.json';
+
+		if (!Rhymix\Framework\Storage::isFile($path)) return null;
+
+		$file = Rhymix\Framework\Storage::read($path);
+		$data = json_decode($file, true);
+
+		if (!$value)
+		{
+			unset($data[$key]);
+		}
+		else
+		{
+			$data[$key] = $value;
+		}
+
+		$data = json_encode($data);
+
+		return Rhymix\Framework\Storage::write($path, $data);
+	}
+
 	function triggerDeleteMarkdown(&$obj)
 	{
 		$args = new stdClass();
 
-		$oMarkdown_HelperModel = getModel('markdown_helper');
-		$find_var = $oMarkdown_HelperModel->getSrls();
+		$oMarkdown_helperModel = getModel('markdown_helper');
+		$find_var = $oMarkdown_helperModel->getSrls();
 
 		$args->target_srl = $obj->$find_var;
 
@@ -34,8 +60,8 @@ class markdown_helperController extends markdown_helper {
 	{
 		$args = new stdClass();
 
-		$oMarkdown_HelperModel = getModel('markdown_helper');
-		$find_var = $oMarkdown_HelperModel->getSrls();
+		$oMarkdown_helperModel = getModel('markdown_helper');
+		$find_var = $oMarkdown_helperModel->getSrls();
 
 		$args->target_srl = $obj->$find_var;
 
@@ -68,5 +94,16 @@ class markdown_helperController extends markdown_helper {
 	function triggerUpdateMarkdown(&$obj)
 	{
 		return $this->triggerInsertMarkdown($obj);
+	}
+
+	function triggerBeforeDisplay()
+	{
+		$oMarkdown_helperModel = getModel('markdown_helper');
+		$css_file = $oMarkdown_helperModel->getConfig('css_file_name');
+
+		if ($css_file && $css_file != 'none')
+		{
+			Context::addCssFile(\RX_BASEDIR . 'modules/markdown_helper/css/'.$css_file.'.css');
+		}
 	}
 }

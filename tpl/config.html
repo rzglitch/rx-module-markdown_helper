@@ -1,0 +1,27 @@
+<include target="header.html" />
+
+<form ruleset="insertConfig" action="./" method="post" class="x_form-horizontal">
+	<input type="hidden" name="module" value="markdown_helper" />
+	<input type="hidden" name="disp_act" value="dispMarkdown_helperAdminConfig" />
+	<input type="hidden" name="act" value="procMarkdown_helperAdminInsertConfig" />
+
+	<section class="section">
+		<div class="x_control-group">
+			<label class="x_control-label" for="load_css">{$lang->mdhelper_css_file_name}</label>
+			<div class="x_controls">
+				<select name="load_css" id="load_css">
+					<option value="none" selected="selected"|cond="!$loaded_css_file || $loaded_css_file == 'none'">{$lang->mdhelper_css_none}</option>
+					<!--@foreach($css_file_list as $fname)-->
+						<option value="{$fname}" selected="selected"|cond="$loaded_css_file == $fname">{$fname}</option>
+					<!--@endforeach-->
+				</select>
+				<p class="x_help-block">{$lang->mdhelper_css_file_name_title}</p>
+			</div>
+		</div>
+	</section>
+	<div class="x_clearfix btnArea">
+		<div class="x_pull-right">
+			<button class="x_btn x_btn-primary" type="submit">{$lang->cmd_registration}</button>
+		</div>
+	</div>
+</form>
