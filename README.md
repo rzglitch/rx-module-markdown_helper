@@ -45,9 +45,11 @@
 }
 ```
 
-`srls` 항목에는 각 게시물의 번호를 부여하는 srl 변수 이름을 넣고, `triggers` 항목에 Delete/Insert/Update 에 해당하는 trigger 액션을 넣으세요.
+`triggers` 항목에 Delete/Insert/Update 에 해당하는 trigger 액션을 넣으세요. 위 예시의 `test.test~~~Action`에는 각각 해당하는 trigger의 이름을 넣으면 됩니다.
 
-위 예시의 `test.test~~~Action`에는 각각 해당하는 trigger의 이름을 넣으면 됩니다.
+`srls` 항목에는 각 게시물의 번호를 부여하는 srl 변수 이름을 넣으세요. srls 리스트는 역순으로 체크합니다.
+
+> 작동 예시) 라이믹스 코어에서 댓글을 삭제할 때 comment_srl과 document_srl이 넘어오는데, srls 항목에서 comment_srl이 document_srl 뒤에 있기 때문에 `getTargetSrl`으로 불러올 때 comment_srl의 앞에 있는 것(들)은 생략합니다.
 
 ## 라이선스
 

@@ -29,22 +29,21 @@ class markdown_helperModel extends markdown_helper {
 		}
 	}
 
-	function getSrls()
+	function getTargetSrl(&$obj)
 	{
-		$primary_key = Context::get('editor_primary_key');
-
 		$config = $this->getConfig('srls');
+		$config = array_reverse($config);
 
-		if ($primary_key)
-		{
-			foreach ($config as $v) {
-				if ($v == $primary_key) {
-					return $v;
-				}
+		$srl = null;
+
+		foreach ($config as $v) {
+			if (property_exists($obj, $v) && $srl === null)
+			{
+				$srl = $v;
 			}
 		}
 
-		return false;
+		return $srl;
 	}
 
 	function getMarkdownData()

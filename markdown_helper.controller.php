@@ -37,7 +37,7 @@ class markdown_helperController extends markdown_helper {
 		$args = new stdClass();
 
 		$oMarkdown_helperModel = getModel('markdown_helper');
-		$find_var = $oMarkdown_helperModel->getSrls();
+		$find_var = $oMarkdown_helperModel->getTargetSrl($obj);
 
 		if ($find_var)
 		{
@@ -64,7 +64,7 @@ class markdown_helperController extends markdown_helper {
 		$args = new stdClass();
 
 		$oMarkdown_helperModel = getModel('markdown_helper');
-		$find_var = $oMarkdown_helperModel->getSrls();
+		$find_var = $oMarkdown_helperModel->getTargetSrl($obj);
 
 		if ($find_var)
 		{
