@@ -46,15 +46,8 @@ class markdown_helperModel extends markdown_helper {
 		return $srl;
 	}
 
-	function getMarkdownData()
+	function getMarkdownData($srl)
 	{
-		if(!checkCSRF())
-		{
-			return new BaseObject(-1, 'msg_security_violation');
-		}
-
-		$srl = (integer) Context::get('target_srl');
-
 		$args = new stdClass();
 
 		$args->target_srl = $srl;
@@ -65,13 +58,11 @@ class markdown_helperModel extends markdown_helper {
 		{
 			$args->content = $data->content;
 
-			$this->add('target_srl', $srl);
-			$this->add('content', $args->content);
+			return $args->content;
 		}
 		else
 		{
-			$this->add('target_srl', $srl);
-			$this->add('content', null);
+			return null;
 		}
 	}
 }

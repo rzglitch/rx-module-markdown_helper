@@ -4,7 +4,6 @@
 	<permissions>
 	</permissions>
 	<actions>
-		<action name="getMarkdownData" type="model"/>
 		<action name="dispMarkdown_helperAdminConfig" type="view" admin_index="true" menu_name="markdown_helper" menu_index="true" />
 		<action name="procMarkdown_helperAdminInsertConfig" type="controller" ruleset="insertConfig" />
 	</actions>
